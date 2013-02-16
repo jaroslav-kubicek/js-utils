@@ -45,6 +45,6 @@ NamespacedStorage.prototype.removeByDate = function(date) {
         }
         return removed;                    
     } else {
-        throw new Error('This method accect only Date object');
+        throw new Error('This method accept only Date object');
     }
 }
