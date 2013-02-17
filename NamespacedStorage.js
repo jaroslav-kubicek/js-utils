@@ -48,3 +48,25 @@ NamespacedStorage.prototype.removeByDate = function(date) {
         throw new Error('This method accept only Date object');
     }
 }
+
+NamespacedStorage.prototype.removeByProperties = function(options) {
+    var removed = 0;
+    if (typeof options ==='object') {
+        for(var key in localStorage) {
+            if (key.indexOf(this.namespace) >= 0) {
+                var toRemove = false;
+                var data = JSON.parse(localStorage.getItem(key));
+                for(var prop in options) {
+                    if(data.hasOwnProperty(prop) && data[prop] === options[prop]) {
+                        toRemove = true;
+                    }
+                }
+                if(toRemove) {
+                    localStorage.removeItem(key);
+                    removed++;
+                }
+            }
+        }                    
+    }
+    return removed;
+}
